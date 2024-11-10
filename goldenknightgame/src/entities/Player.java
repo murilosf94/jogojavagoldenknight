@@ -412,10 +412,10 @@ public class Player extends Entity {
 
 	private void loadAnimations() {
 		BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYER_ATLAS);
-		animations = new BufferedImage[2][2];
+		animations = new BufferedImage[7][8];
 		for (int j = 0; j < animations.length; j++)
 			for (int i = 0; i < animations[j].length; i++)
-				animations[j][i] = img.getSubimage(i * 64, j * 60, 64, 60);
+				animations[j][i] = img.getSubimage(i * 64, j * 40, 64, 40);
 
 		statusBarImg = LoadSave.GetSpriteAtlas(LoadSave.STATUS_BAR);
 	}
