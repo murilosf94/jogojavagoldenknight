@@ -10,7 +10,6 @@ import java.awt.Point;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
-import audio.AudioPlayer;
 import gamestates.Playing;
 import main.Game;
 import utilz.LoadSave;
@@ -97,8 +96,7 @@ public class Player extends Entity {
 				aniTick = 0;
 				aniIndex = 0;
 				playing.setPlayerDying(true);
-				playing.getGame().getAudioPlayer().playEffect(AudioPlayer.DIE);
-
+				
 				// Check if player died in air
 				if (!IsEntityOnFloor(hitbox, lvlData)) {
 					inAir = true;
@@ -106,8 +104,6 @@ public class Player extends Entity {
 				}
 			} else if (aniIndex == GetSpriteAmount(DEAD) - 1 && aniTick >= ANI_SPEED - 1) {
 				playing.setGameOver(true);
-				playing.getGame().getAudioPlayer().stopSong();
-				playing.getGame().getAudioPlayer().playEffect(AudioPlayer.GAMEOVER);
 			} else {
 				updateAnimationTick();
 
@@ -177,7 +173,6 @@ public class Player extends Entity {
 
 		playing.checkEnemyHit(attackBox);
 		playing.checkObjectHit(attackBox);
-		playing.getGame().getAudioPlayer().playAttackSound();
 	}
 
 	private void setAttackBoxOnRightSide() {
@@ -360,7 +355,6 @@ public class Player extends Entity {
 	private void jump() {
 		if (inAir)
 			return;
-		playing.getGame().getAudioPlayer().playEffect(AudioPlayer.JUMP);
 		inAir = true;
 		airSpeed = jumpSpeed;
 	}
@@ -418,10 +412,10 @@ public class Player extends Entity {
 
 	private void loadAnimations() {
 		BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYER_ATLAS);
-		animations = new BufferedImage[7][8];
+		animations = new BufferedImage[2][2];
 		for (int j = 0; j < animations.length; j++)
 			for (int i = 0; i < animations[j].length; i++)
-				animations[j][i] = img.getSubimage(i * 64, j * 40, 64, 40);
+				animations[j][i] = img.getSubimage(i * 64, j * 60, 64, 60);
 
 		statusBarImg = LoadSave.GetSpriteAtlas(LoadSave.STATUS_BAR);
 	}

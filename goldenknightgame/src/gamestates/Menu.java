@@ -69,7 +69,6 @@ public class Menu extends State implements Statemethods {
 				if (mb.isMousePressed())
 					mb.applyGamestate();
 				if (mb.getState() == Gamestate.PLAYING)
-					game.getAudioPlayer().setLevelSong(game.getPlaying().getLevelManager().getLevelIndex());
 				break;
 			}
 		}

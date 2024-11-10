@@ -40,8 +40,7 @@ public class Playing extends State implements Statemethods {
 	private int rightBorder = (int) (0.75 * Game.GAME_WIDTH);
 	private int maxLvlOffsetX;
 
-	private BufferedImage backgroundImg, bigCloud, smallCloud;
-	private BufferedImage[] questionImgs, exclamationImgs;
+	private BufferedImage backgroundImg;
 
 	//private int[] smallCloudsPos;
 	private Random rnd = new Random();
@@ -293,7 +292,6 @@ public class Playing extends State implements Statemethods {
 	}
 
 	public void setLevelCompleted(boolean levelCompleted) {
-		game.getAudioPlayer().lvlCompleted();
 		if (levelManager.getLevelIndex() + 1 >= levelManager.getAmountOfLevels()) {
 			// No more levels
 			gameCompleted = true;
