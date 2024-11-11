@@ -19,7 +19,7 @@ public class LoadSave {
 	public static final String MENU_BACKGROUND_IMG = "backgroundmeugkg.png";
 	public static final String PLAYING_BG_IMG = "backgrounggkg.png";
 	public static final String INIMIGOFOGO1 = "inimigofogo1gkg.png";
-	public static final String STATUS_BAR = "health_power_bar.png";
+	public static final String STATUS_BAR = "barradevidagkg.png";
 	public static final String COMPLETED_IMG = "levelcompletogkg.png";
 	public static final String TRAP_ATLAS = "trap_atlas.png";
 	public static final String CANHAODEFOGO = "canhaodefogogkg.png";
