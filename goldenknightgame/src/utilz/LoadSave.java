@@ -13,31 +13,27 @@ public class LoadSave {
 
 	public static final String PLAYER_ATLAS = "spritescavaleirogkg.png";
 	public static final String LEVEL_ATLAS = "outsidesprites1gkg.png";
-	public static final String MENU_BUTTONS = "button_atlas.png";
-	public static final String MENU_BACKGROUND = "menu_background.png";
-	public static final String PAUSE_BACKGROUND = "pause_menu.png";
-	public static final String SOUND_BUTTONS = "sound_button.png";
-	public static final String URM_BUTTONS = "urm_buttons.png";
-	public static final String VOLUME_BUTTONS = "volume_buttons.png";
-	public static final String MENU_BACKGROUND_IMG = "background_menu.png";
+	public static final String MENU_BUTTONS = "botoesmenugkg.png";
+	public static final String MENU_BACKGROUND = "backgrougmenugkg.png";
+	public static final String PAUSE_BACKGROUND = "pausebackgrounggkg.png";
+	public static final String MENU_BACKGROUND_IMG = "backgroundmeugkg.png";
 	public static final String PLAYING_BG_IMG = "backgrounggkg.png";
-	public static final String CRABBY_SPRITE = "crabby_sprite.png";
+	public static final String INIMIGOFOGO1 = "inimigofogo1gkg.png";
 	public static final String STATUS_BAR = "health_power_bar.png";
 	public static final String COMPLETED_IMG = "levelcompletogkg.png";
-	public static final String POTION_ATLAS = "potions_sprites.png";
-	public static final String CONTAINER_ATLAS = "objects_sprites.png";
 	public static final String TRAP_ATLAS = "trap_atlas.png";
-	public static final String CANNON_ATLAS = "cannon_atlas.png";
+	public static final String CANHAODEFOGO = "canhaodefogogkg.png";
 	public static final String BOLADEFOGO = "boladefogogkg.png";
-	public static final String DEATH_SCREEN = "death_screen.png";
+	public static final String DEATH_SCREEN = "telamortegkg.png";
 	public static final String OPTIONS_MENU = "options_background.png";
-	public static final String PINKSTAR_ATLAS = "pinkstar_atlas.png";
-	public static final String SHARK_ATLAS = "inimigofogo2gkg.png";
-	public static final String CREDITS = "credits_list.png";
-	public static final String GRASS_ATLAS = "grass_atlas1gkg.png";
+	public static final String BOLAINIMIGO = "inimigobolagkg.png";
+	public static final String INIMIGOFOGO2 = "inimigofogo2gkg.png";
+	public static final String PLANTA = "planta_atlas1gkg.png";
 	public static final String GAME_COMPLETED = "game_completed.png";
 	public static final String LAVAANIMACAO = "lavaatlasanimation1gkg.png";
 	public static final String LAVA = "lava1gkg.png";
+	public static final String URM_BUTTONS = "urm_buttons.png";
+
 
 	public static BufferedImage GetSpriteAtlas(String fileName) {
 		BufferedImage img = null;

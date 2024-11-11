@@ -118,10 +118,10 @@ public abstract class Enemy extends Entity {
 	protected boolean isPlayerCloseForAttack(Player player) {
 		int absValue = (int) Math.abs(player.hitbox.x - hitbox.x);
 		switch (enemyType) {
-		case CRABBY -> {
+		case INIMIGOFOGO1 -> {
 			return absValue <= attackDistance;
 		}
-		case SHARK -> {
+		case INIMIGOFOGO2 -> {
 			return absValue <= attackDistance * 2;
 		}
 		}
@@ -147,7 +147,7 @@ public abstract class Enemy extends Entity {
 		if (attackBox.intersects(player.hitbox))
 			player.changeHealth(-GetEnemyDmg(enemyType), this);
 		else {
-			if (enemyType == SHARK)
+			if (enemyType == INIMIGOFOGO2)
 				return;
 		}
 		attackChecked = true;
@@ -159,14 +159,14 @@ public abstract class Enemy extends Entity {
 			aniTick = 0;
 			aniIndex++;
 			if (aniIndex >= GetSpriteAmount(enemyType, state)) {
-				if (enemyType == CRABBY || enemyType == SHARK) {
+				if (enemyType == INIMIGOFOGO1 || enemyType == INIMIGOFOGO2) {
 					aniIndex = 0;
 
 					switch (state) {
 					case ATTACK, HIT -> state = IDLE;
 					case DEAD -> active = false;
 					}
-				} else if (enemyType == PINKSTAR) {
+				} else if (enemyType == BOLAINIMIGO) {
 					if (state == ATTACK)
 						aniIndex = 3;
 					else {

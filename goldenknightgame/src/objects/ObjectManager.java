@@ -20,9 +20,8 @@ public class ObjectManager {
 
 	private Playing playing;
 	private BufferedImage[][] potionImgs, containerImgs;
-	private BufferedImage[] cannonImgs, grassImgs;
+	private BufferedImage[] cannonImgs, plantaImgs;
 	private BufferedImage spikeImg, boladefogoImg;
-	private ArrayList<Potion> potions;
 	private ArrayList<GameContainer> containers;
 	private ArrayList<Projectile> projectiles = new ArrayList<>();
 
@@ -46,22 +45,7 @@ public class ObjectManager {
 				e.hurt(200);
 	}
 
-	public void checkObjectTouched(Rectangle2D.Float hitbox) {
-		for (Potion p : potions)
-			if (p.isActive()) {
-				if (hitbox.intersects(p.getHitbox())) {
-					p.setActive(false);
-					applyEffectToPlayer(p);
-				}
-			}
-	}
 
-	public void applyEffectToPlayer(Potion p) {
-		if (p.getObjType() == RED_POTION)
-			playing.getPlayer().changeHealth(RED_POTION_VALUE);
-		else
-			playing.getPlayer().changePower(BLUE_POTION_VALUE);
-	}
 
 	public void checkObjectHit(Rectangle2D.Float attackbox) {
 		for (GameContainer gc : containers)
@@ -71,7 +55,6 @@ public class ObjectManager {
 					int type = 0;
 					if (gc.getObjType() == BARREL)
 						type = 1;
-					potions.add(new Potion((int) (gc.getHitbox().x + gc.getHitbox().width / 2), (int) (gc.getHitbox().y - gc.getHitbox().height / 2), type));
 					return;
 				}
 			}
@@ -79,46 +62,29 @@ public class ObjectManager {
 
 	public void loadObjects(Level newLevel) {
 		currentLevel = newLevel;
-		potions = new ArrayList<>(newLevel.getPotions());
 		containers = new ArrayList<>(newLevel.getContainers());
 		projectiles.clear();
 	}
 
 	private void loadImgs() {
-		BufferedImage potionSprite = LoadSave.GetSpriteAtlas(LoadSave.POTION_ATLAS);
-		potionImgs = new BufferedImage[2][7];
-
-		for (int j = 0; j < potionImgs.length; j++)
-			for (int i = 0; i < potionImgs[j].length; i++)
-				potionImgs[j][i] = potionSprite.getSubimage(12 * i, 16 * j, 12, 16);
-
-		BufferedImage containerSprite = LoadSave.GetSpriteAtlas(LoadSave.CONTAINER_ATLAS);
-		containerImgs = new BufferedImage[2][8];
-
-		for (int j = 0; j < containerImgs.length; j++)
-			for (int i = 0; i < containerImgs[j].length; i++)
-				containerImgs[j][i] = containerSprite.getSubimage(40 * i, 30 * j, 40, 30);
 
 		spikeImg = LoadSave.GetSpriteAtlas(LoadSave.TRAP_ATLAS);
 
 		cannonImgs = new BufferedImage[7];
-		BufferedImage temp = LoadSave.GetSpriteAtlas(LoadSave.CANNON_ATLAS);
+		BufferedImage temp = LoadSave.GetSpriteAtlas(LoadSave.CANHAODEFOGO);
 
 		for (int i = 0; i < cannonImgs.length; i++)
 			cannonImgs[i] = temp.getSubimage(i * 40, 0, 40, 26);
 
 		boladefogoImg = LoadSave.GetSpriteAtlas(LoadSave.BOLADEFOGO);
 		
-		BufferedImage grassTemp = LoadSave.GetSpriteAtlas(LoadSave.GRASS_ATLAS);
-		grassImgs = new BufferedImage[2];
-		for (int i = 0; i < grassImgs.length; i++)
-			grassImgs[i] = grassTemp.getSubimage(32 * i, 0, 32, 32);
+		BufferedImage plantaTemp = LoadSave.GetSpriteAtlas(LoadSave.PLANTA);
+		plantaImgs = new BufferedImage[2];
+		for (int i = 0; i < plantaImgs.length; i++)
+			plantaImgs[i] = plantaTemp.getSubimage(32 * i, 0, 32, 32);
 	}
 
 	public void update(int[][] lvlData, Player player) {
-		for (Potion p : potions)
-			if (p.isActive())
-				p.update();
 
 		for (GameContainer gc : containers)
 			if (gc.isActive())
@@ -181,8 +147,6 @@ public class ObjectManager {
 	}
 
 	public void draw(Graphics g, int xLvlOffset) {
-		drawPotions(g, xLvlOffset);
-		drawContainers(g, xLvlOffset);
 		drawTraps(g, xLvlOffset);
 		drawCannons(g, xLvlOffset);
 		drawProjectiles(g, xLvlOffset);
@@ -191,7 +155,7 @@ public class ObjectManager {
 
 	private void drawGrass(Graphics g, int xLvlOffset) {
 		for (Grass grass : currentLevel.getGrass())
-			g.drawImage(grassImgs[grass.getType()], grass.getX() - xLvlOffset, grass.getY(), (int) (32 * Game.SCALE), (int) (32 * Game.SCALE), null);
+			g.drawImage(plantaImgs[grass.getType()], grass.getX() - xLvlOffset, grass.getY(), (int) (32 * Game.SCALE), (int) (32 * Game.SCALE), null);
 	}
 
 
@@ -220,34 +184,9 @@ public class ObjectManager {
 
 	}
 
-	private void drawContainers(Graphics g, int xLvlOffset) {
-		for (GameContainer gc : containers)
-			if (gc.isActive()) {
-				int type = 0;
-				if (gc.getObjType() == BARREL)
-					type = 1;
-				g.drawImage(containerImgs[type][gc.getAniIndex()], (int) (gc.getHitbox().x - gc.getxDrawOffset() - xLvlOffset), (int) (gc.getHitbox().y - gc.getyDrawOffset()), CONTAINER_WIDTH,
-						CONTAINER_HEIGHT, null);
-			}
-	}
-
-	private void drawPotions(Graphics g, int xLvlOffset) {
-		for (Potion p : potions)
-			if (p.isActive()) {
-				int type = 0;
-				if (p.getObjType() == RED_POTION)
-					type = 1;
-				g.drawImage(potionImgs[type][p.getAniIndex()], (int) (p.getHitbox().x - p.getxDrawOffset() - xLvlOffset), (int) (p.getHitbox().y - p.getyDrawOffset()), POTION_WIDTH, POTION_HEIGHT,
-						null);
-			}
-	}
 
 	public void resetAllObjects() {
 		loadObjects(playing.getLevelManager().getCurrentLevel());
-		for (Potion p : potions)
-			p.reset();
-		for (GameContainer gc : containers)
-			gc.reset();
 		for (Cannon c : currentLevel.getCannons())
 			c.reset();
 	}

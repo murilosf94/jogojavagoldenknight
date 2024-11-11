@@ -56,13 +56,6 @@ public class Playing extends State implements Statemethods {
 		initClasses();
 
 		backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.PLAYING_BG_IMG);
-//		bigCloud = LoadSave.GetSpriteAtlas(LoadSave.BIG_CLOUDS);
-//		smallCloud = LoadSave.GetSpriteAtlas(LoadSave.SMALL_CLOUDS);
-//		smallCloudsPos = new int[8];
-//		for (int i = 0; i < smallCloudsPos.length; i++)
-//			smallCloudsPos[i] = (int) (90 * Game.SCALE) + rnd.nextInt((int) (100 * Game.SCALE));
-
-
 
 		calcLvlOffset();
 		loadStartLevel();
@@ -193,10 +186,6 @@ public class Playing extends State implements Statemethods {
 
 	public void checkEnemyHit(Rectangle2D.Float attackBox) {
 		enemyManager.checkEnemyHit(attackBox);
-	}
-
-	public void checkPotionTouched(Rectangle2D.Float hitbox) {
-		objectManager.checkObjectTouched(hitbox);
 	}
 
 	public void checkSpikesTouched(Player p) {

@@ -12,7 +12,7 @@ import static utilz.Constants.EnemyConstants.*;
 public class EnemyManager {
 
 	private Playing playing;
-	private BufferedImage[][] crabbyArr, pinkstarArr, sharkArr;
+	private BufferedImage[][] inimigofogo1Arr, bolainimigoArr, inimigofogo2Arr;
 	private Level currentLevel;
 
 	public EnemyManager(Playing playing) {
@@ -26,19 +26,19 @@ public class EnemyManager {
 
 	public void update(int[][] lvlData) {
 		boolean isAnyActive = false;
-		for (Crabby c : currentLevel.getCrabs())
+		for (inimigofogo1 c : currentLevel.getinimigofogo1())
 			if (c.isActive()) {
 				c.update(lvlData, playing);
 				isAnyActive = true;
 			}
 
-		for (Pinkstar p : currentLevel.getPinkstars())
+		for (Bolainimigo p : currentLevel.getBolainimigo())
 			if (p.isActive()) {
 				p.update(lvlData, playing);
 				isAnyActive = true;
 			}
 
-		for (Shark s : currentLevel.getSharks())
+		for (inimigofogo2 s : currentLevel.getinimigofogo2())
 			if (s.isActive()) {
 				s.update(lvlData, playing);
 				isAnyActive = true;
@@ -49,36 +49,36 @@ public class EnemyManager {
 	}
 
 	public void draw(Graphics g, int xLvlOffset) {
-		drawCrabs(g, xLvlOffset);
-		drawPinkstars(g, xLvlOffset);
-		drawSharks(g, xLvlOffset);
+		drawinimigofogo1(g, xLvlOffset);
+		drawBolainimigo(g, xLvlOffset);
+		drawinimigofogo2(g, xLvlOffset);
 	}
 
-	private void drawSharks(Graphics g, int xLvlOffset) {
-		for (Shark s : currentLevel.getSharks())
+	private void drawinimigofogo2(Graphics g, int xLvlOffset) {
+		for (inimigofogo2 s : currentLevel.getinimigofogo2())
 			if (s.isActive()) {
-				g.drawImage(sharkArr[s.getState()][s.getAniIndex()], (int) s.getHitbox().x - xLvlOffset - SHARK_DRAWOFFSET_X + s.flipX(),
-						(int) s.getHitbox().y - SHARK_DRAWOFFSET_Y + (int) s.getPushDrawOffset(), SHARK_WIDTH * s.flipW(), SHARK_HEIGHT, null);
+				g.drawImage(inimigofogo2Arr[s.getState()][s.getAniIndex()], (int) s.getHitbox().x - xLvlOffset - INIMIGOFOGO2_DRAWOFFSET_X + s.flipX(),
+						(int) s.getHitbox().y - INIMIGOFOGO2_DRAWOFFSET_Y + (int) s.getPushDrawOffset(), INIMIGOFOGO2_WIDTH * s.flipW(), INIMIGOFOGO2_HEIGHT, null);
 //				s.drawHitbox(g, xLvlOffset);
 //				s.drawAttackBox(g, xLvlOffset);
 			}
 	}
 
-	private void drawPinkstars(Graphics g, int xLvlOffset) {
-		for (Pinkstar p : currentLevel.getPinkstars())
+	private void drawBolainimigo(Graphics g, int xLvlOffset) {
+		for (Bolainimigo p : currentLevel.getBolainimigo())
 			if (p.isActive()) {
-				g.drawImage(pinkstarArr[p.getState()][p.getAniIndex()], (int) p.getHitbox().x - xLvlOffset - PINKSTAR_DRAWOFFSET_X + p.flipX(),
-						(int) p.getHitbox().y - PINKSTAR_DRAWOFFSET_Y + (int) p.getPushDrawOffset(), PINKSTAR_WIDTH * p.flipW(), PINKSTAR_HEIGHT, null);
+				g.drawImage(bolainimigoArr[p.getState()][p.getAniIndex()], (int) p.getHitbox().x - xLvlOffset - BOLAINIMIGO_DRAWOFFSET_X + p.flipX(),
+						(int) p.getHitbox().y - BOLAINIMIGO_DRAWOFFSET_Y + (int) p.getPushDrawOffset(), BOLAINIMIGO_WIDTH * p.flipW(), BOLAINIMIGO_HEIGHT, null);
 //				p.drawHitbox(g, xLvlOffset);
 			}
 	}
 
-	private void drawCrabs(Graphics g, int xLvlOffset) {
-		for (Crabby c : currentLevel.getCrabs())
+	private void drawinimigofogo1(Graphics g, int xLvlOffset) {
+		for (inimigofogo1 c : currentLevel.getinimigofogo1())
 			if (c.isActive()) {
 
-				g.drawImage(crabbyArr[c.getState()][c.getAniIndex()], (int) c.getHitbox().x - xLvlOffset - CRABBY_DRAWOFFSET_X + c.flipX(),
-						(int) c.getHitbox().y - CRABBY_DRAWOFFSET_Y + (int) c.getPushDrawOffset(), CRABBY_WIDTH * c.flipW(), CRABBY_HEIGHT, null);
+				g.drawImage(inimigofogo1Arr[c.getState()][c.getAniIndex()], (int) c.getHitbox().x - xLvlOffset - INIMIGOFOGO1_DRAWOFFSET_X + c.flipX(),
+						(int) c.getHitbox().y - INIMIGOFOGO1_DRAWOFFSET_Y + (int) c.getPushDrawOffset(), INIMIGOFOGO1_WIDTH * c.flipW(), INIMIGOFOGO1_HEIGHT, null);
 
 //				c.drawHitbox(g, xLvlOffset);
 //				c.drawAttackBox(g, xLvlOffset);
@@ -87,7 +87,7 @@ public class EnemyManager {
 	}
 
 	public void checkEnemyHit(Rectangle2D.Float attackBox) {
-		for (Crabby c : currentLevel.getCrabs())
+		for (inimigofogo1 c : currentLevel.getinimigofogo1())
 			if (c.isActive())
 				if (c.getState() != DEAD && c.getState() != HIT)
 					if (attackBox.intersects(c.getHitbox())) {
@@ -95,7 +95,7 @@ public class EnemyManager {
 						return;
 					}
 
-		for (Pinkstar p : currentLevel.getPinkstars())
+		for (Bolainimigo p : currentLevel.getBolainimigo())
 			if (p.isActive()) {
 				if (p.getState() == ATTACK && p.getAniIndex() >= 3)
 					return;
@@ -108,7 +108,7 @@ public class EnemyManager {
 				}
 			}
 
-		for (Shark s : currentLevel.getSharks())
+		for (inimigofogo2 s : currentLevel.getinimigofogo2())
 			if (s.isActive()) {
 				if (s.getState() != DEAD && s.getState() != HIT)
 					if (attackBox.intersects(s.getHitbox())) {
@@ -119,9 +119,9 @@ public class EnemyManager {
 	}
 
 	private void loadEnemyImgs() {
-		crabbyArr = getImgArr(LoadSave.GetSpriteAtlas(LoadSave.CRABBY_SPRITE), 9, 5, CRABBY_WIDTH_DEFAULT, CRABBY_HEIGHT_DEFAULT);
-		pinkstarArr = getImgArr(LoadSave.GetSpriteAtlas(LoadSave.PINKSTAR_ATLAS), 8, 5, PINKSTAR_WIDTH_DEFAULT, PINKSTAR_HEIGHT_DEFAULT);
-		sharkArr = getImgArr(LoadSave.GetSpriteAtlas(LoadSave.SHARK_ATLAS), 8, 5, SHARK_WIDTH_DEFAULT, SHARK_HEIGHT_DEFAULT);
+		inimigofogo1Arr = getImgArr(LoadSave.GetSpriteAtlas(LoadSave.INIMIGOFOGO1), 9, 5, INIMIGOFOGO1_WIDTH_DEFAULT, INIMIGOFOGO1_HEIGHT_DEFAULT);
+		bolainimigoArr = getImgArr(LoadSave.GetSpriteAtlas(LoadSave.BOLAINIMIGO), 8, 5, BOLAINIMIGO_WIDTH_DEFAULT, BOLAINIMIGO_HEIGHT_DEFAULT);
+		inimigofogo2Arr = getImgArr(LoadSave.GetSpriteAtlas(LoadSave.INIMIGOFOGO2), 8, 5, INIMIGOFOGO2_WIDTH_DEFAULT, INIMIGOFOGO2_HEIGHT_DEFAULT);
 	}
 
 	private BufferedImage[][] getImgArr(BufferedImage atlas, int xSize, int ySize, int spriteW, int spriteH) {
@@ -133,11 +133,11 @@ public class EnemyManager {
 	}
 
 	public void resetAllEnemies() {
-		for (Crabby c : currentLevel.getCrabs())
+		for (inimigofogo1 c : currentLevel.getinimigofogo1())
 			c.resetEnemy();
-		for (Pinkstar p : currentLevel.getPinkstars())
+		for (Bolainimigo p : currentLevel.getBolainimigo())
 			p.resetEnemy();
-		for (Shark s : currentLevel.getSharks())
+		for (inimigofogo2 s : currentLevel.getinimigofogo2())
 			s.resetEnemy();
 	}
 
